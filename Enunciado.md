@@ -217,10 +217,10 @@ angular.module('services.NOMBREMODULO', ['ngRoute'])
 	* Incluir el archivo javascript en app/index.html
 	* Incluir el módulo (nombrado anteriormente como 'services.XXXXXX') en el módulo princopal definido en app/app.js.
 
-8. En el controlador de la vista2 inyecte
+8. En el controlador de la vista2 inyecte el servicio antes creado (haga el cambio de nombres donde aplique):
 
 	```javascript
-.controller('AyudaCtrl', ['$scope', 'NOMBRESERVICIO', function ($scope, NOMBRESERVICIO) {
+.controller('View2Ctrl', ['$scope', 'NOMBRESERVICIO', function ($scope, NOMBRESERVICIO) {
 		...
 ```
 9. En el mismo controlador cree:
