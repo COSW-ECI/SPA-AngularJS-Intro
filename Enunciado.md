@@ -2,7 +2,7 @@
 ###Construcción de Software - COSW
 ###Taller - Prototipado de aplicaciones SPA
 
-Para este ejercicio se va a construír, de forma colaborativa, 
+####Trabajo individual o en parejas
 
 ## Parte I.
 
@@ -236,3 +236,8 @@ angular.module('services.NOMBREMODULO', ['ngRoute'])
 $scope.listado=fabrica.getListado();             
 ```
 14. Verifique el funcionamiento global de la aplicación. Lo agregado en la vista dos, debe verse reflejado en la vista de 'listado'.
+
+##Opcional
+
+1. Revise la documentación del filtro [OrderBy](https://docs.angularjs.org/api/ng/filter/orderBy), y modifique la vista del listado para que el cliente pueda decidir con qué orden quiere visualizar las tareas pendientes.
+
