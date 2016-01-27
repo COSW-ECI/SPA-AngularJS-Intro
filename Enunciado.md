@@ -6,7 +6,7 @@ Para este ejercicio se va a construír, de forma colaborativa,
 
 ## Parte I.
 
-1. Cree un proyecto base de Sprint Boot basado en Maven, que incluya dentro de sus dependencias los elementos Web (SpringMVC, Servidor Web embebido, etc). Para esto, seleccione el 'starter' Web:
+1. Cree un proyecto base de Sprint Boot basado en Maven, que incluya dentro de sus dependencias los elementos Web (SpringMVC, Servidor Web embebido, etc). Para esto, abra el sitio de [Spring Intializer](https://start.spring.io), y cree un nuevo proyecto agregando el 'starter' Web:
 
 	![alt text](img/SprintInit.png)
 
