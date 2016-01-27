@@ -135,10 +135,90 @@ angular.module('myApp', [
   'myApp.version'
 ]).
 ```
-***********
+
+6. Rectifique que la aplicaición ya tenga las tres vistas.
+
+##Parte III.
+
+La funcionalidad de la vista del 'listado de tareas pendientes' es simplemente mostrar una lista de tareas que tiene las siguientes propiedades:
+
+* Descripción de la tarea.
+* Prioridad de 1 a 10.
+
+1. Edite el controlador de la vista de 'tareas pendientes', e inyecte en éste el objeto $scope:
+
+	```javascript	
+	.controller('ControladorListado', ['$scope', function($scope){         
+```
+
+2. Agregue al controlador un atributo en el que se contendrán las tareas que se deben mostrar en la vista. Para probar el diseño de la vista, haga que -por ahora- dicho atributo tenga un listado estático de tareas (en este ejemplo, cada '{}' debe reempalzarse por un objeto javascript):
+
+	```json
+		$scope.listado=[
+			{},
+			{},
+			{}
+		];
+```
 
 
-6. Inyectar $scope al Controlador de la vista de listado
+3. En la vista de 'tareas pendientes' agregue una tabla usando la directiva ng-repeat (donde todo.propiedad1 y todo.propiedad2 deben reemplazarse por los nombres de las propiedades de los objetos contenidos en $scope.listado:
+
+	```html
+    <table class="table table-striped table-hover">
+      <tbody>
+        <tr ng-repeat="todo in listado">
+          <td>{{todo.propiedad2}}</td>
+        </tr>
+        <tr ng-repeat="todo in listado">
+          <td>{{todo.propiedad2}}</td>
+        </tr>
+      </tbody>
+    </table>
+```
+
+4. Verifique el funcionamiento en el navegador. Si el estilo 'table table-striped table-hover' no funciona (se debería mostrar la tabla en colores intercalados), significa que no se ha importado la hoja de estilos de bootstrap. Para hacerlo, revise el encabezado de la página principal de la SPA (app/index.html), y rectifique que se esté usando:
+
+	```html
+<link rel="stylesheet" href="bower_components/bootsxtrap-css-only/css/bootstrap.css">
+```
+5. Para este ejercicio se requiere que desde la vista2, se capture la información (la tarea pendiente) que se muestra en la vista 'listado'. Para hacer esto, se va a implementar un servicio de tipo 'fábrica' que será inyectado a los controladores de las dos vistas. Dentro de la estructura planteada, se creará un directorio 'services' al mismo nivel de las vistas:
+
+	```
+		app\
+			index.html 
+			app.js 
+			view1\
+				controlador.js
+				vista.html
+			services\
+			... <- definición de servicios comunes.
+```
+
+6. En la ruta antes indicada cree un archivo javascript que defina un módulo, y dentro de éste, un servicio de tipo 'fábrica':
+
+	```javascript
+'use strict';
+angular.module('services.NOMBRESERVICIO', ['ngRoute'])
+
+        .factory('NOMBREFABRICA', function () {
+            var data = {
+                listado: []
+            };
+            return {
+                getListado: function () {
+                    return data.listado;
+                },
+                addTodo: function (todo) {
+                    data.listado.push(todo);
+                }};
+        });
+```        
+
+6. Ahora, va a modificar la vista #2, para que en ésta el usuario agregue nuevas tareas pendientes. Para hacer esto recuerde que debe:
+	* En el controlador de vista2:
+		* Agregar en el controlador de la vista2 dos propiedades, en las cuales se capturarán el texto y la prioridad ingresadas por el usuario.
+		* Agregar una función que, al ser invocada, actua
 
 	```javascript	
 	.controller('ControladorListado', ['$scope', function()         
@@ -150,6 +230,9 @@ angular.module('myApp', [
 11. Inyectar la fábrica en ambos controladores.
 
 =========xxxxx
+
+Cambiar la fábrica por un elememto $resource
+Crear un recurso en SpringBoot
 
 
 7. dsfsdf
