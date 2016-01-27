@@ -169,8 +169,6 @@ La funcionalidad de la vista del 'listado de tareas pendientes' es simplemente m
       <tbody>
         <tr ng-repeat="todo in listado">
           <td>{{todo.propiedad2}}</td>
-        </tr>
-        <tr ng-repeat="todo in listado">
           <td>{{todo.propiedad2}}</td>
         </tr>
       </tbody>
@@ -180,7 +178,7 @@ La funcionalidad de la vista del 'listado de tareas pendientes' es simplemente m
 4. Verifique el funcionamiento en el navegador. Si el estilo 'table table-striped table-hover' no funciona (se debería mostrar la tabla en colores intercalados), significa que no se ha importado la hoja de estilos de bootstrap. Para hacerlo, revise el encabezado de la página principal de la SPA (app/index.html), y rectifique que se esté usando:
 
 	```html
-<link rel="stylesheet" href="bower_components/bootsxtrap-css-only/css/bootstrap.css">
+<link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css">
 ```
 5. Para este ejercicio se requiere que desde la vista2, se capture la información (la tarea pendiente) que se muestra en la vista 'listado'. Para hacer esto, se va a implementar un servicio de tipo 'fábrica' que será inyectado a los controladores de las dos vistas. Dentro de la estructura planteada, se creará un directorio 'services' al mismo nivel de las vistas:
 
@@ -195,13 +193,13 @@ La funcionalidad de la vista del 'listado de tareas pendientes' es simplemente m
 			... <- definición de servicios comunes.
 ```
 
-6. En la ruta antes indicada cree un archivo javascript que defina un módulo, y dentro de éste, un servicio de tipo 'fábrica':
+6. En la ruta antes indicada cree un archivo javascript que defina un módulo, y dentro de éste, un servicio de tipo 'fábrica' (cambie los nombres NOMBREMODULO/NOMBRESERVICIO a algo más adecuado):
 
 	```javascript
 'use strict';
-angular.module('services.NOMBRESERVICIO', ['ngRoute'])
+angular.module('services.NOMBREMODULO', ['ngRoute'])
 
-        .factory('NOMBREFABRICA', function () {
+        .factory('NOMBRESERVICIO', function () {
             var data = {
                 listado: []
             };
@@ -215,65 +213,26 @@ angular.module('services.NOMBRESERVICIO', ['ngRoute'])
         });
 ```        
 
-6. Ahora, va a modificar la vista #2, para que en ésta el usuario agregue nuevas tareas pendientes. Para hacer esto recuerde que debe:
-	* En el controlador de vista2:
-		* Agregar en el controlador de la vista2 dos propiedades, en las cuales se capturarán el texto y la prioridad ingresadas por el usuario.
-		* Agregar una función que, al ser invocada, actua
+7. Para incluír el módulo anterior de la aplicación, repita los pasos anteriormente descritos:
+	* Incluir el archivo javascript en app/index.html
+	* Incluir el módulo (nombrado anteriormente como 'services.XXXXXX') en el módulo princopal definido en app/app.js.
 
-	```javascript	
-	.controller('ControladorListado', ['$scope', function()         
+8. En el controlador de la vista2 inyecte
+
+	```javascript
+.controller('AyudaCtrl', ['$scope', 'NOMBRESERVICIO', function ($scope, NOMBRESERVICIO) {
+		...
 ```
-7. Agregar al controlador un atributo que contenga las tareas por realizar.
-8. Ajustar estilo.
-9. Verificar funcionamiento.
-10. Agregar un servicio tipo fábrica, que sea común para los controladors de la vista 2 y la vista nueva.
-11. Inyectar la fábrica en ambos controladores.
+9. En el mismo controlador cree:
+	* Las propiedades requeridas para capturar los detalles de una 'tarea pendiente'.
+	* Una función que, al ser invocada, tome los valores de las dos propiedades definidas anteriormente, cree un objeto de tipo tarea pendiente, y lo agregue a la fábrica.
 
-=========xxxxx
+10. En la vista2 agregue los campos necesarios para capturar los detalles de una tarea pendiente. Asócielos con las propiedades correspondientes de su controlador con la directiva 'ng-model'.
+11. Agregue un botón, y asóciele la función antes creada con la directiva 'ng-click'.
+12. Verifique el funcionamiento de la vista2.
+13. Modifique el controlador de la vista 'listado' para que en lugar de inicializarse con el conjunto de valores estáticos, sea inicializado con el contenido de la fábrica:
 
-Cambiar la fábrica por un elememto $resource
-Crear un recurso en SpringBoot
-
-
-7. dsfsdf
-
-
-1. Crear el proyecto de SpringBoot initializer
-1. Montar el ambiente a partir de angular-seed
-
-	Estructura:
-		app\
-			index.html <- importación de js
-			app.js <-definición de la aplicación
-		view1\
-			controlador.js
-			vista.html
-		services\
-			...
-
-2. Ajustar las dependencias de bower: angular, route
-3. bower install
-4. Remover control de versiones
-5. Crear aplicación con tres vistas parciales
-6. Importar los .js en app\index.html
-7. Importar los módulos en la declaración de la aplicaición 'app.js'
-8. Crear un servicio (factory). Importar en html, agregar el módulo módulo en app.js
-9. En uno de los controladores inyectar la fábrica. Usarla
-
-10. Crear una fábrica que use ngResource
-	* Agregar la dependencia de angular-resource en bower.json
-	* bower install
-	* Inyectar ngResource en el módulo correspondiente
-
-	```html
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
+	```javascript
+$scope.listado=fabrica.getListado();             
 ```
+14. Verifique el funcionamiento global de la aplicación. Lo agregado en la vista dos, debe verse reflejado en la vista de 'listado'.
