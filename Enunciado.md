@@ -40,6 +40,7 @@
         </dependency>
 ```
 
+
 4. En el proyecto recién generado, la ruta 'src/main/resources/static' corresponde al espacio donde se publicará el contenido Web (es decir, donde residirá la SPA). Para generar un 'adamiaje' de base, desde el directorio 
 
 	```
@@ -65,9 +66,9 @@ git clone --depth=1 --branch=master https://github.com/angular/angular-seed.git 
   "license": "MIT",
   "private": true,
   "dependencies": {
-    	"angular": "~1.4.0",
-    	"angular-route": "~1.4.0",
-    	"bootstrap-css-only": "~3.3.6"
+    	 "angular": "^1.5.8",
+    	 "angular-route": "^1.5.8",
+    	 "bootstrap-css-only": "^3.3.6"
   	 }
 }
 ```
