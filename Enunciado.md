@@ -194,13 +194,13 @@ La funcionalidad de la vista del 'listado de tareas pendientes' es simplemente m
 			... <- definición de servicios comunes.
 ```
 
-6. En la ruta antes indicada cree un archivo javascript que defina un módulo, y dentro de éste, un servicio de tipo 'fábrica' (cambie los nombres NOMBREMODULO/NOMBRESERVICIO a algo más adecuado):
+6. En la ruta antes indicada cree un archivo javascript que defina un módulo, y dentro de éste, un servicio de tipo 'fábrica' (cambie los nombres NOMBREMODULO/NOMBREFABRICA a algo más adecuado):
 
 	```javascript
 'use strict';
-angular.module('services.NOMBREMODULO', ['ngRoute'])
+angular.module('services.listFactory', ['ngRoute'])
 
-        .factory('NOMBRESERVICIO', function () {
+        .factory('NOMBREFABRICA', function () {
             var data = {
                 listado: []
             };
@@ -221,7 +221,7 @@ angular.module('services.NOMBREMODULO', ['ngRoute'])
 8. En el controlador de la vista2 inyecte el servicio antes creado (haga el cambio de nombres donde aplique):
 
 	```javascript
-.controller('View2Ctrl', ['$scope', 'NOMBRESERVICIO', function ($scope, NOMBRESERVICIO) {
+.controller('View2Ctrl', ['$scope', 'NOMBREFABRICA', function ($scope, NOMBREFABRICA) {
 		...
 ```
 9. En el mismo controlador cree:
@@ -234,7 +234,7 @@ angular.module('services.NOMBREMODULO', ['ngRoute'])
 13. Modifique el controlador de la vista 'listado' para que en lugar de inicializarse con el conjunto de valores estáticos, sea inicializado con el contenido de la fábrica:
 
 	```javascript
-$scope.listado=fabrica.getListado();             
+$scope.listado=NOMBREFABRICA.getListado();             
 ```
 14. Verifique el funcionamiento global de la aplicación. Lo agregado en la vista dos, debe verse reflejado en la vista de 'listado'.
 
